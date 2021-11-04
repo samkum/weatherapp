@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam weather app</title>
+    <script src="https://kit.fontawesome.com/2400edab93.js" crossorigin="anonymous"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #f2f1ee;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.maindiv {
+  width: 20vw;
+  height: 50vh;
+  background-color: #a0b7dc;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.maindiv i {
+  margin-left: auto;
+  margin-right: auto;
+  color: yellow;
+  font-size: 45px;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  height: 15vh;
+  z-index: 1;
+}
+.content {
+  padding-top: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content i {
+  color: black;
+}
+.content p {
+  font-family: "Poppins", sans-serif;
+}
+.center {
+  z-index: 1;
+}
+.st {
+  width: 150%;
+  border-radius: 50px;
+  height: 50vh;
+  background-color: #c1ccdd;
+  transform: rotate(10deg);
+  position: absolute;
+  animation: spin 4s linear infinite;
+}
+.nd {
+  background-color: #cad7ed;
+  transform: rotate(50deg);
+  opacity: 0.5;
+}
+.rd {
+  transform: rotate(90deg);
+  opacity: 0.5;
+}
+
+.para p {
+  margin-right: 26px;
+}
+.para1 {
+  display: flex;
+  justify-content: center;
+}
+.para1 p {
+  margin-top: 15px;
+  font-size: 70%;
+  opacity: 0.5;
+}
+.para2 p {
+  opacity: 1;
+  font-size: 100%;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .maindiv {
+    width: 30vw;
+    height: 50vh;
+  }
+}
+@media (max-width: 468px) {
+  .maindiv {
+    width: 70vw;
+    height: 50vh;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+      
+        <div class="maindiv">
+            <div id="mainicon" class="icon">
+                
+            </div>
+            <div class="content">
+                <div class="st"></div>
+                <div class="st nd"></div>
+                <div class="st rd"></div>
+                <div class="para1 para2">
+                    <p class="center">{%location%}</p>
+                </div>
+                <div class="st rd"></div>
+                <div class="para1">
+                    <p class="center"><span id="day"></span>  </p>
+                </div>
+                <div class="para1 para2">
+                    <p class="center">{%tempreature%}&deg; C</p>
+                </div>
+                <div class="para1">
+                    <p class="center">MIN {%tempreaturemin%}&deg; C || MAX {%tempreaturemax%}&deg; C</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const montharray =['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const dayarray =['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ,'Sun'];
+        let date = new Date();
+        let da = date.getDate();
+        let month = date.getMonth();
+        let day = date.getDay();
+        let hours = date.getHours(); 
+        let min = date.getMinutes();  
+        let am = "AM";
+        
+        if (hours > 12){
+            hours = hours - 12;
+            am = "PM";
+        }
+        let final = `${dayarray[day-1]} || ${montharray[month]} ${day} || ${hours}:${min} ${am}`;
+        document.getElementById("day").innerHTML = final;
+
+        const tempstatus = "{%tempstatus%}";
+
+        if (tempstatus == "Sunny"){
+            document.getElementById("mainicon").innerHTML = 
+            " <i class='fas fa-sun' style='color: #eccc68;'> </i> ";
+        }
+        else if (tempstatus == "Clouds"){
+            document.getElementById("mainicon").innerHTML = 
+            " <i class='fas fa-cloud' style='color: #eccc68;'> </i> ";
+        }
+        else if (tempstatus == "Rainy"){
+            document.getElementById("mainicon").innerHTML = 
+            " <i class='fas fa-cloud-rain' style='color: #eccc68;'> </i> ";
+        }
+        else if (tempstatus == "Clear"){
+            document.getElementById("mainicon").innerHTML = 
+            " <i class='fas fa-sun' style='color: #eccc68;'> </i> ";
+        }
+        else if (tempstatus == "Smoke"){
+            document.getElementById("mainicon").innerHTML = 
+            " <i class='fas fa-smog' style='color: #eccc68;'> </i> ";
+        }
+        else{
+            document.getElementById("mainicon").innerHTML = 
+            " <i class='fas fa-cloud' style='color: #eccc68;'> </i> ";
+        }
+        
+    </script>
+
+</body>
+</html>
